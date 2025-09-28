@@ -59,6 +59,8 @@
         </WizardStep>
 
        <WizardStep id="step2" title="Model Allocation">
+
+       <Panel >
     <t:Table
         id="allocationTable"
         rows="{viewModel>/Billings}"
@@ -121,6 +123,44 @@
         </t:Column>
 
     </t:Table>
+
+
+
+    <f:SimpleForm
+    id="totalForm"
+    editable="false"
+    layout="ResponsiveGridLayout"
+    labelSpanXL="2"
+    labelSpanL="2"
+    labelSpanM="4"
+    labelSpanS="6"
+    columnsXL="2"
+    columnsL="2"
+    columnsM="2"
+    singleContainerFullSize="false"
+    class="sapUiSmallMarginTop">
+
+    <f:content>
+        <Label text="Total Stock" design="Bold" />
+        <Text text="{viewModel>/TotalStock}" class="sapUiSmallMarginBegin DealerName" />
+
+        <Label text="Total Available" design="Bold" />
+        <Text text="{viewModel>/TotalAvailable}" class="sapUiSmallMarginBegin DealerName" />
+
+        <Label text="Total Qty" design="Bold" />
+        <Text text="{viewModel>/TotalQuantity}" class="sapUiSmallMarginBegin totalQty" />
+
+        <Label text="Fund Required" design="Bold" />
+        <Text text="{viewModel>/TotalFundRequired}" class="sapUiSmallMarginBegin limit" />
+
+        <Label text="Total Value" design="Bold" />
+        <Text text="{viewModel>/TotalOrderValue}" class="sapUiSmallMarginBegin fundavailable" />
+    </f:content>
+</f:SimpleForm>
+
+    </Panel>
+
+
 </WizardStep>
 
     </Wizard>

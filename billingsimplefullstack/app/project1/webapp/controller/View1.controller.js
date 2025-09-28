@@ -75,8 +75,7 @@ sap.ui.define([
                             maxFractionDigits: 2
                         }, new sap.ui.core.Locale("en_IN"));
 
-
-
+  
                         var totalStock = 0;
                         var totalAvailable = 0;
                         var totalQuantity = 0;
@@ -115,6 +114,13 @@ sap.ui.define([
                         else {
                             console.warn("tableContainer not found in view");
                         }
+
+                         var oWizard = that.getView().byId("myWizard");
+    var oStep1 = that.getView().byId("step1");
+    var oStep2 = that.getView().byId("step2");
+
+    oWizard.validateStep(oStep1);  
+    oWizard.goToStep(oStep2);      
 
                         sap.m.MessageToast.show("Dealer details loaded.");
                     },

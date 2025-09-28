@@ -6,15 +6,21 @@
     <Dialog
         id="vectorFlowDialog"
         title="Vector Flow Details"
-        stretchOnPhone="true">
+       >
 
         <content>
+        <VBox
+    width="100%"
+    justifyContent="Center"
+    alignItems="Center"
+    class="sapUiSmallMargin">
             <t:Table
                 id="vectorFlowTable"
                 selectionMode="None"
                 columnHeaderVisible="true"
                 alternateRowColors="true"
                 rows="{viewModel>/Billings}"
+                width="auto"
                 >
 
                 <!-- FST Column -->
@@ -87,6 +93,7 @@
                 </t:Column>
 
             </t:Table>
+            </VBox>
         </content>
 
         <endButton>
