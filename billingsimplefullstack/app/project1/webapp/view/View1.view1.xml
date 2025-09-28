@@ -1,0 +1,127 @@
+<mvc:View
+    controllerName="project1.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:t="sap.ui.table">
+
+    <Wizard id="myWizard" showNextButton="true" >
+        <!-- Step 1: Dealer Information -->
+        <WizardStep id="step1" title="Dealer Information">
+            <VBox id="vb_Id" class="sapUiSmallMargin">
+                <f:SimpleForm id="SimpleFormToolbar"
+                    editable="true"
+                    layout="ResponsiveGridLayout"
+                    labelSpanXL="4"
+                    labelSpanL="3"
+                    labelSpanM="4"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="0"
+                    emptySpanL="4"
+                    emptySpanM="0"
+                    emptySpanS="0"
+                    columnsXL="2"
+                    columnsL="1"
+                    columnsM="1"
+                    singleContainerFullSize="false"
+                    ariaLabelledBy="Title1">
+
+                    <f:content>
+                        <Label text="Select Customer ID" labelFor="idDealerCombo" />
+                        <ComboBox
+                            id="idDealerCombo"
+                            width="300px"
+                            showClearIcon="true"
+                            placeholder="Enter or choose an ID..."
+                            items="{ path: '/Dealer' }">
+                            <core:Item key="{dealerId}" text="{dealerId}" />
+                        </ComboBox>
+                    </f:content>
+
+                    <Label text="Dealer Name" />
+                    <Input value="{viewModel>/DealerName}" editable="false" />
+
+                    <Label text="Fund Availability" />
+                    <Input value="{viewModel>/Stock_Availability}" editable="false" />
+
+                    <Label text="Fund Required" />
+                    <Input value="{viewModel>/Limit_available}" editable="false" />
+
+                    <VBox>
+                        <HBox>
+                            <Button text="Go" type="Emphasized" press=".onGoPress" />
+                        </HBox>
+                    </VBox>
+                </f:SimpleForm>
+            </VBox>
+        </WizardStep>
+
+       <WizardStep id="step2" title="Model Allocation">
+    <t:Table
+        id="allocationTable"
+        rows="{viewModel>/Billings}"
+        selectionMode="None"
+        alternateRowColors="true"
+       
+        width="auto"
+        enableColumnReordering="false"
+        columnHeaderVisible="true"
+       >
+
+        <t:Column label="Model Code" width="150px">
+            <t:template>
+                <Text text="{viewModel>modelCode}" />
+            </t:template>
+        </t:Column>
+
+        <t:Column label="Model Description" width="25%">
+            <t:template>
+                <Link text="{viewModel>modelDescription}" press=".onModelDescPress" />
+            </t:template>
+        </t:Column>
+
+        <t:Column id="colStockAvailable" headerSpan="2" width="80px" hAlign="Center">
+            <t:multiLabels>
+                <Label text="Stock Availablilty" textAlign="Center"/>
+                <Label text="Stock" textAlign="Center"/>
+            </t:multiLabels>
+            <t:template>
+                <Text text="{viewModel>availability}" />
+            </t:template>
+        </t:Column>
+
+        <t:Column id="colStockTotal" width="80px" hAlign="Center">
+            <t:multiLabels>
+                <Label text="Stock Availablilty" textAlign="Center"/>
+                <Label text="Available" textAlign="Center"/>
+            </t:multiLabels>
+            <t:template>
+                <Text text="{viewModel>stock}" />
+            </t:template>
+        </t:Column>
+
+        <t:Column label="Total Qty" width="80px" hAlign="Center">
+            <t:template>
+                <Text text="{viewModel>totalQuantity}" />
+            </t:template>
+        </t:Column>
+
+        <t:Column label="Fund Required" width="120px" hAlign="End" class="fundRequiredText">
+            <t:template>
+                <Text text="{viewModel>fundRequired}" />
+            </t:template>
+        </t:Column>
+
+        <t:Column label="Order Value" width="120px" hAlign="End">
+            <t:template>
+                <Text text="{viewModel>OrderVAlue}" />
+            </t:template>
+        </t:Column>
+
+    </t:Table>
+</WizardStep>
+
+    </Wizard>
+</mvc:View>

@@ -1,0 +1,134 @@
+/* Enter your custom styles here */
+.fundRequiredText {
+    font-weight: bold;
+    color: #d32f2f; /* SAP red */
+}
+
+/* -------------------- Column Headers -------------------- */
+
+/* FST column header */
+.fstHeader {
+    font-weight: bold !important;
+    background-color: #1976d2 !important; /* Dark Blue */
+    color: white !important;
+    text-align: center !important;
+}
+
+/* BLACK column header */
+.blackHeader {
+    font-weight: bold !important;
+    background-color: #000000 !important;
+    color: white !important;
+    text-align: center !important;
+}
+
+/* RED column header */
+.redHeader {
+    font-weight: bold !important;
+    background-color: #d32f2f !important;
+    color: white !important;
+    text-align: center !important;
+}
+
+/* YELLOW column header */
+.yellowHeader {
+    font-weight: bold !important;
+    background-color: #fbc02d !important;
+    color: black !important;
+    text-align: center !important;
+}
+
+/* GREEN column header */
+.greenHeader {
+    font-weight: bold !important;
+    background-color: #388e3c !important;
+    color: white !important;
+    text-align: center !important;
+}
+
+/* ALLOCATION column header */
+.allocationHeader {
+    font-weight: bold !important;
+    background-color: #1976d2 !important;
+    color: white !important;
+    text-align: center !important;
+}
+
+/* -------------------- Table Cells -------------------- */
+
+/* FST column cells */
+.fstCell {
+    font-weight: bold;
+    background-color: #e3f2fd; /* light blue */
+    text-align: center;
+}
+
+/* BLACK column cells */
+.blackCell {
+    font-weight: bold;
+    background-color: #e0e0e0; /* light gray */
+    text-align: center;
+    color: black;
+}
+
+/* RED column cells */
+.redCell {
+    font-weight: bold;
+    background-color: #ffcdd2; /* light red */
+    text-align: center;
+    color: black;
+}
+
+/* YELLOW column cells */
+.yellowCell {
+    font-weight: bold;
+    background-color: #fff9c4; /* light yellow */
+    text-align: center;
+}
+
+/* GREEN column cells */
+.greenCell {
+    font-weight: bold;
+    background-color: #c8e6c9; /* light green */
+    text-align: center;
+}
+
+/* ALLOCATION column cells */
+.allocationCell {
+    font-weight: bold;
+    background-color: #bbdefb; /* light blue */
+    text-align: center;
+}
+
+.hiddenTable {
+    display: none;
+}
+.visibleTable {
+    display: block;
+}
+
+.fundavailable{
+    color: green;
+    font-weight: bold;
+}
+
+.DealerName{
+    font-weight: bold;
+    color: #000000; /* SAP blue */
+}
+
+.limit{
+    font-weight: bold;
+    color: #d32f2f; /* SAP red */
+}   
+
+.boldHeader {
+  font-weight: bold !important;
+}
+
+.totalQty{
+    font-weight: bold;
+    color: #1976d2; /* SAP blue */
+}
+
+
