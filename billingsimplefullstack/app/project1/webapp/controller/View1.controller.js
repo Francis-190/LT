@@ -28,8 +28,10 @@ sap.ui.define([
             },
 
             onCloseDialog: function () {
-                if (this._oModelDialog) {
-                    this._oModelDialog.close();
+                console.log(`Close dialog pressed`);
+                
+                if (this.oDialog) {
+                    this.oDialog.close();
                 }
             },
 
@@ -116,11 +118,13 @@ sap.ui.define([
                         }
 
                          var oWizard = that.getView().byId("myWizard");
-    var oStep1 = that.getView().byId("step1");
-    var oStep2 = that.getView().byId("step2");
+    // var oStep1 = that.getView().byId("step1");
+    // var oStep2 = that.getView().byId("step2");
 
-    oWizard.validateStep(oStep1);  
-    oWizard.goToStep(oStep2);      
+    // oWizard.validateStep(oStep1);  
+    // oWizard.goToStep(oStep2);     
+    
+    oWizard.nextStep();
 
                         sap.m.MessageToast.show("Dealer details loaded.");
                     },

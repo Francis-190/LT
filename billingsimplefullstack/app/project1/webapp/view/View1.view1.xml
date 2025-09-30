@@ -1,0 +1,306 @@
+<mvc:View
+    controllerName="project1.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:t="sap.ui.table"
+>
+    <Page
+        id="mainPage"
+        title="SKU Billing Allocation"
+        class="mainPage"
+    >
+        <VBox class="sapUiSmallMargin">
+            <Panel
+                headerText="Dealer Information"
+                expandable="false"
+                class="tablePanel"
+            >
+                <f:SimpleForm
+                    id="dealerForm"
+                    editable="true"
+                    layout="ResponsiveGridLayout"
+                    labelSpanXL="4"
+                    labelSpanL="3"
+                    labelSpanM="4"
+                    labelSpanS="12"
+                    columnsXL="2"
+                    columnsL="1"
+                    columnsM="1"
+                    singleContainerFullSize="false"
+                >
+                    <f:content>
+                        <Label
+                            text="Select Customer ID"
+                            labelFor="idDealerCombo"
+                        />
+                        <ComboBox
+                            id="idDealerCombo"
+                            width="220px"
+                            showClearIcon="true"
+                            placeholder="Enter or choose an ID..."
+                            items="{ path: '/Dealer' }"
+                        >
+                            <core:Item
+                                key="{dealerId}"
+                                text="{dealerId}"
+                            />
+                        </ComboBox>
+
+                        <Button
+                            text="Go"
+                            type="Emphasized"
+                            press=".onGoPress"
+                            width="100px"
+                            icon="sap-icon://open-command-field"
+                            
+                        />
+
+                        <Label text="Dealer Name" />
+                        <Text
+                            text="{viewModel>/DealerName}"
+                            width="250px"
+                            class="DealerName"
+                        />
+
+                        <Label text="Fund Availability" />
+                        <Text
+                            text="{viewModel>/Stock_Availability}"
+                            width="250px"
+                            class="fundavailable"
+                        />
+
+                        <Label text="Limit Available(in INF)" />
+                        <Text
+                            text="{viewModel>/Limit_available}"
+                            width="250px"
+                            class="limit"
+                        />
+                    </f:content>
+                </f:SimpleForm>
+            </Panel>
+
+            <VBox height="40px" />
+
+            <Panel
+                headerText="Model Allocation"
+                expandable="false"
+                class="tablePanel hiddenTable"
+                id="tableContainer"
+            >
+                <t:Table
+                    id="allocationTable"
+                    rows="{viewModel>/Billings}"
+                    selectionMode="None"
+                    alternateRowColors="true"
+                    width="auto"
+                    enableColumnReordering="false"
+                    columnHeaderVisible="true"
+                    class="allocationTable"
+                >
+                    <t:Column width="150px">
+                        <t:label>
+                            <Label
+                                text="Model Code"
+                                class="boldHeader"
+                            />
+                        </t:label>
+                        <t:template>
+                            <Text text="{viewModel>modelCode}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column width="25%">
+                        <t:label>
+                            <Label
+                                text="Model Description"
+                                class="boldHeader"
+                            />
+                        </t:label>
+                        <t:template>
+                            <Link
+                                text="{viewModel>modelDescription}"
+                                press=".onModelDescPress"
+                                class="modelLink"
+                            />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column
+                        id="colStockAvailable"
+                        headerSpan="2"
+                        width="80px"
+                        hAlign="Center"
+                    >
+                        <t:multiLabels>
+                            <Label
+                                text="Stock Availablilty"
+                                textAlign="Center"
+                                class="boldHeader"
+                            />
+                            <Label
+                                text="Stock"
+                                textAlign="Center"
+                                class="boldHeader"
+                                tooltip="Total stock available in warehouse"
+                            />
+                        </t:multiLabels>
+                        <t:template>
+                            <Text
+                                text="{viewModel>availability}"
+                                class="stockValue"
+                            />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column
+                        id="colStockTotal"
+                        width="80px"
+                        hAlign="Center"
+                    >
+                        <t:multiLabels>
+                            <Label
+                                text="Stock Availablilty"
+                                textAlign="Center"
+                                class="boldHeader"
+                            />
+                            <Label
+                                text="Available"
+                                textAlign="Center"
+                                class="boldHeader"
+                                tooltip="Total available in warehouse"
+                            />
+                        </t:multiLabels>
+                        <t:template>
+                            <Text
+                                text="{viewModel>stock}"
+                                class="stockValue"
+                            />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column
+                        width="80px"
+                        hAlign="Center"
+                    >
+                        <t:label>
+                            <Label
+                                text="Total Qty"
+                                class="boldHeader"
+                            />
+                        </t:label>
+                        <t:template>
+                            <Text
+                                text="{viewModel>totalQuantity}"
+                                class="totalQty"
+                            />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column
+                        width="120px"
+                        hAlign="End"
+                    >
+                        <t:label>
+                            <Label
+                                text="Fund Required"
+                                class="boldHeader"
+                            />
+                        </t:label>
+                        <t:template>
+                            <Text
+                                text="{viewModel>fundRequired}"
+                                class="fundavailable"
+                            />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column
+                        width="120px"
+                        hAlign="End"
+                    >
+                        <t:label>
+                            <Label
+                                text="Order Value"
+                                class="boldHeader"
+                            />
+                        </t:label>
+                        <t:template>
+                            <Text
+                                text="{viewModel>OrderVAlue}"
+                                class="fundavailable"
+                            />
+                        </t:template>
+                    </t:Column>
+                </t:Table>
+            </Panel>
+        </VBox>
+
+        <VBox height="25px" />
+
+        <VBox
+            class="sapUiSmallMargin"
+            width="40%"
+        >
+            <Panel
+                headerText="Total Information"
+                expandable="false"
+                class="tablePanel hiddenTable"
+                id="totaltableContainer"
+            >
+                <f:SimpleForm
+                    id="totalForm"
+                    editable="true"
+                    layout="ResponsiveGridLayout"
+                    labelSpanXL="4"
+                    labelSpanL="4"
+                    labelSpanM="5"
+                    labelSpanS="4"
+                    columnsXL="12"
+                    columnsL="12"
+                    columnsM="2"
+                    singleContainerFullSize="false"
+                    class="totalForm"
+                >
+                    <f:content>
+                        <Label text="Total Stock" />
+                        <Text
+                            text="{path: 'viewModel>/TotalStock', formatter: '.formatter.formatIndianNumber'}"
+                            width="250px"
+                            class="DealerName"
+                        />
+
+                        <Label text="Total Available" />
+                        <Text
+                            text="{viewModel>/TotalAvailable}"
+                            class="DealerName"
+                            width="250px"
+                        />
+
+                        <Label text="Total Qty" />
+                        <Text
+                            text="{viewModel>/TotalQuantity}"
+                            width="250px"
+                            class="totalQty"
+                        />
+
+                        <Label text="Fund Required" />
+                        <Text
+                            text="{viewModel>/TotalFundRequired}"
+                            width="250px"
+                            class="limit"
+                        />
+
+                        <Label text="Total Value" />
+                        <Text
+                            text="{viewModel>/TotalOrderValue}"
+                            width="250px"
+                            class="fundavailable"
+                        />
+                    </f:content>
+                </f:SimpleForm>
+            </Panel>
+        </VBox>
+    </Page>
+</mvc:View>

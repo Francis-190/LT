@@ -1,0 +1,19 @@
+# Generated manifest.yml based on template version 0.1.0
+# appName = billingsimplefullstack
+# language=nodejs
+# multitenancy=
+---
+applications:
+# -----------------------------------------------------------------------------------
+# Backend Service
+# -----------------------------------------------------------------------------------
+- name: billingsimplefullstack-srv
+  random-route: true  # for development only
+  path: gen/srv
+  memory: 256M
+  disk_quota: 256M
+  buildpack: nodejs_buildpack
+  services:
+  - billingsimplefullstack-db
+
+
