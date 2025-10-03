@@ -16,20 +16,66 @@ sap.ui.define([
 
 
             },
-            onModelDescPress: async function () {
 
-                console.log("Model Description link pressed");
+         onModelDescPress: async function (oEvent) {
+    const oView = this.getView();
+    const sDealerId = oView.byId("idDealerCombo").getSelectedKey();
+    const oVBox = oView.byId("vectorFlowBox");
 
-                this.oDialog ??= await this.loadFragment({
-                    name: "project1.view.fragments.VectorFlowTable"
-                });
+    if (!sDealerId) {
+        sap.m.MessageToast.show("Please select a Dealer.");
+        return;
+    }
 
-                this.oDialog.open();
-            },
+    const oLink = oEvent.getSource();
+    const oContext = oLink.getBindingContext("viewModel");
+    const sModelCode = oContext.getProperty("modelCode");
+
+    console.log("Clicked Model Code:", sModelCode);
+
+    if (this._lastModelCode === sModelCode) {
+        const bVisible = oVBox.getVisible();
+        oVBox.setVisible(!bVisible);
+        console.log("Toggled visibility for same model code:", !bVisible);
+        return;
+    }
+
+    try {
+        const oModel = oView.getModel();
+
+        const oData = await new Promise((resolve, reject) => {
+            oModel.read("/Dealer(dealerId='" + sDealerId + "')", {
+                urlParameters: {
+                    "$expand": "billings"
+                },
+                success: resolve,
+                error: reject
+            });
+        });
+
+        const aAllBillings = oData.billings?.results || [];
+        const aFilteredBilling = aAllBillings.filter(item => item.modelCode === sModelCode);
+
+        console.log("Filtered Billing:", aFilteredBilling);
+
+        const oDialogModel = new sap.ui.model.json.JSONModel({
+            Billings: aFilteredBilling
+        });
+
+        oView.setModel(oDialogModel, "dialogModel");
+
+        oVBox.setVisible(true);
+        this._lastModelCode = sModelCode; 
+    } catch (error) {
+        sap.m.MessageToast.show("Failed to load dealer billing data.");
+        console.error("Error loading dealer:", error);
+    }
+},
+
 
             onCloseDialog: function () {
                 console.log(`Close dialog pressed`);
-                
+
                 if (this.oDialog) {
                     this.oDialog.close();
                 }
@@ -39,6 +85,11 @@ sap.ui.define([
                 var oView = this.getView();
                 var oComboBox = oView.byId("idDealerCombo");
                 var sDealerId = oComboBox.getSelectedKey();
+    const oVBox = oView.byId("vectorFlowBox");
+
+    if (oVBox) {
+        oVBox.setVisible(false);
+    }
 
                 if (!sDealerId) {
                     sap.m.MessageToast.show("Please select a Dealer first.");
@@ -77,7 +128,7 @@ sap.ui.define([
                             maxFractionDigits: 2
                         }, new sap.ui.core.Locale("en_IN"));
 
-  
+
                         var totalStock = 0;
                         var totalAvailable = 0;
                         var totalQuantity = 0;
@@ -117,14 +168,14 @@ sap.ui.define([
                             console.warn("tableContainer not found in view");
                         }
 
-                         var oWizard = that.getView().byId("myWizard");
-    // var oStep1 = that.getView().byId("step1");
-    // var oStep2 = that.getView().byId("step2");
+                        var oWizard = that.getView().byId("myWizard");
+                        // var oStep1 = that.getView().byId("step1");
+                        // var oStep2 = that.getView().byId("step2");
 
-    // oWizard.validateStep(oStep1);  
-    // oWizard.goToStep(oStep2);     
-    
-    oWizard.nextStep();
+                        // oWizard.validateStep(oStep1);  
+                        // oWizard.goToStep(oStep2);     
+
+                        oWizard.nextStep();
 
                         sap.m.MessageToast.show("Dealer details loaded.");
                     },

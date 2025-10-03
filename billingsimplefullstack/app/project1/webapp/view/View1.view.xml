@@ -68,13 +68,13 @@
                     <!-- Model Code -->
                     <t:Column width="150px">
                         <t:label><Label text="Model Code" class="boldHeader"/></t:label>
-                        <t:template><Text text="{viewModel>modelCode}" /></t:template>
+                        <t:template><Link id= "12345" text="{viewModel>modelCode}" press=".onModelDescPress" class="modelLink" /></t:template>
                     </t:Column>
 
                     <!-- Model Description -->
                     <t:Column width="25%">
                         <t:label><Label text="Model Description" class="boldHeader"/></t:label>
-                        <t:template><Link text="{viewModel>modelDescription}" press=".onModelDescPress" class="modelLink"/></t:template>
+                        <t:template><Text text="{viewModel>modelDescription}" /></t:template>
                     </t:Column>
 
                     <!-- Stock Columns -->
@@ -114,7 +114,7 @@
 
                 </t:Table>
 
-                <!-- Total Information -->
+                <!-- Total Information
                 <f:SimpleForm
                     id="totalForm"
                     editable="false"
@@ -145,7 +145,118 @@
                         <Label text="Total Value" design="Bold" />
                         <Text text="{viewModel>/TotalOrderValue}" class="fundavailable"/>
                     </f:content>
-                </f:SimpleForm>
+                </f:SimpleForm> -->
+
+                <VBox height="35px"></VBox>
+
+
+                 <VBox
+                 id="vectorFlowBox"
+                width="100%"
+                justifyContent="Center"
+                alignItems="Center"
+                visible="false"
+                class="allocationTable">
+
+                <t:Table
+                    id="vectorFlowTable1"
+                    selectionMode="None"
+                    columnHeaderVisible="true"
+                    alternateRowColors="true"
+                    rows="{dialogModel>/Billings}"
+                    visibleRowCount="1"
+                    width="98%" >
+                    
+
+                    <!-- FST Column -->
+                    <t:Column hAlign="Center" headerSpan="6">
+                        <t:multiLabels>
+                            <Label text="Vector Flow" textAlign="Center"/>
+                            <Label text="FST" textAlign="Center" class="fstHeader"/>
+                        </t:multiLabels>
+                        <t:template>
+                            <Text text="{dialogModel>fst}" />
+                        </t:template>
+                    </t:Column>
+
+                    <!-- BLACK Column -->
+                    <t:Column hAlign="Center">
+                        <t:multiLabels>
+                            <Label text="Vector Flow" textAlign="Center"/>
+                            <Label text="BLACK" textAlign="Center" class="blackHeader"/>
+                        </t:multiLabels>
+                        <t:template>
+                            <Text text="{dialogModel>black}" />
+                        </t:template>
+                    </t:Column>
+
+                    <!-- RED Column -->
+                    <t:Column hAlign="Center">
+                        <t:multiLabels>
+                            <Label text="Vector Flow" textAlign="Center"/>
+                            <Label text="RED" textAlign="Center" class="redHeader"/>
+                        </t:multiLabels>
+                        <t:template>
+                            <Text text="{dialogModel>red}" />
+                        </t:template>
+                    </t:Column>
+
+                    <!-- YELLOW Column -->
+                    <t:Column hAlign="Center">
+                        <t:multiLabels>
+                            <Label text="Vector Flow" textAlign="Center"/>
+                            <Label text="YELLOW" textAlign="Center" class="yellowHeader"/>
+                        </t:multiLabels>
+                        <t:template>
+                            <Text text="{dialogModel>yellow}" />
+                        </t:template>
+                    </t:Column>
+
+                    <!-- GREEN Column -->
+                    <t:Column hAlign="Center">
+                        <t:multiLabels>
+                            <Label text="Vector Flow" textAlign="Center"/>
+                            <Label text="GREEN" textAlign="Center" class="greenHeader"/>
+                        </t:multiLabels>
+                        <t:template>
+                            <Text text="{dialogModel>green}" />
+                        </t:template>
+                    </t:Column>
+
+                    <!-- ALLOCATION Column -->
+                    <t:Column hAlign="Center" width="120px">
+                        <t:multiLabels>
+                            <Label text="Vector Flow" textAlign="Center"/>
+                            <Label text="ALLOCATION" textAlign="Center" class="allocationHeader"/>
+                        </t:multiLabels>
+                        <t:template>
+                            <Text text="{dialogModel>allocation}" />
+                        </t:template>
+                    </t:Column>
+
+                    <!-- SNOP ALLOCATION Column -->
+                    <t:Column hAlign="Center">
+                        <t:multiLabels>
+                            <Label text="SNOP Allocation" textAlign="Center"/>
+                        </t:multiLabels>
+                        <t:template>
+                            <Text text="{dialogModel>snopAllocation}" textAlign="Center"/>
+                        </t:template>
+                    </t:Column>
+
+                    <!-- SVPO ALLOCATION Column -->
+                    <t:Column hAlign="Center">
+                        <t:multiLabels>
+                            <Label text="SVPO Allocation" textAlign="Center"/>
+                        </t:multiLabels>
+                        <t:template>
+                            <Text text="{dialogModel>svopAllocation}" textAlign="Center"/>
+                        </t:template>
+                    </t:Column>
+
+                </t:Table>
+            </VBox>
+
 
             </Panel>
         </WizardStep>

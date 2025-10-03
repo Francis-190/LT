@@ -15,6 +15,8 @@ modules:
     type: nodejs
     path: gen/srv
     parameters:
+      memory: 512M
+      disk-quota: 512M
       instances: 1
       buildpack: nodejs_buildpack
     build-parameters:
@@ -23,20 +25,3 @@ modules:
       - name: srv-api # required by consumers of CAP services (e.g. approuter)
         properties:
           srv-url: ${default-url}
-    requires:
-      - name: billingsimplefullstack-db
-
-  - name: billingsimplefullstack-db-deployer
-    type: hdb
-    path: gen/db
-    parameters:
-      buildpack: nodejs_buildpack
-    requires:
-      - name: billingsimplefullstack-db
-
-resources:
-  - name: billingsimplefullstack-db
-    type: com.sap.xs.hdi-container
-    parameters:
-      service: hana
-      service-plan: hdi-shared

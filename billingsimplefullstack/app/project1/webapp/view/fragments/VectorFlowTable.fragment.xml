@@ -19,8 +19,9 @@
                     selectionMode="None"
                     columnHeaderVisible="true"
                     alternateRowColors="true"
-                    rows="{viewModel>/Billings}"
-                    width="98%" class="allocationTable">
+                    rows="{dialogModel>/Billings}"
+                    visibleRowCount="1"
+                    width="98%" >
                     
 
                     <!-- FST Column -->
@@ -30,7 +31,7 @@
                             <Label text="FST" textAlign="Center" class="fstHeader"/>
                         </t:multiLabels>
                         <t:template>
-                            <Text text="{viewModel>fst}" />
+                            <Text text="{dialogModel>fst}" />
                         </t:template>
                     </t:Column>
 
@@ -41,7 +42,7 @@
                             <Label text="BLACK" textAlign="Center" class="blackHeader"/>
                         </t:multiLabels>
                         <t:template>
-                            <Text text="{viewModel>black}" />
+                            <Text text="{dialogModel>black}" />
                         </t:template>
                     </t:Column>
 
@@ -52,7 +53,7 @@
                             <Label text="RED" textAlign="Center" class="redHeader"/>
                         </t:multiLabels>
                         <t:template>
-                            <Text text="{viewModel>red}" />
+                            <Text text="{dialogModel>red}" />
                         </t:template>
                     </t:Column>
 
@@ -63,7 +64,7 @@
                             <Label text="YELLOW" textAlign="Center" class="yellowHeader"/>
                         </t:multiLabels>
                         <t:template>
-                            <Text text="{viewModel>yellow}" />
+                            <Text text="{dialogModel>yellow}" />
                         </t:template>
                     </t:Column>
 
@@ -74,7 +75,7 @@
                             <Label text="GREEN" textAlign="Center" class="greenHeader"/>
                         </t:multiLabels>
                         <t:template>
-                            <Text text="{viewModel>green}" />
+                            <Text text="{dialogModel>green}" />
                         </t:template>
                     </t:Column>
 
@@ -85,7 +86,7 @@
                             <Label text="ALLOCATION" textAlign="Center" class="allocationHeader"/>
                         </t:multiLabels>
                         <t:template>
-                            <Text text="{viewModel>allocation}" />
+                            <Text text="{dialogModel>allocation}" />
                         </t:template>
                     </t:Column>
 
@@ -95,7 +96,7 @@
                             <Label text="SNOP Allocation" textAlign="Center"/>
                         </t:multiLabels>
                         <t:template>
-                            <Text text="{viewModel>snopAllocation}" textAlign="Center"/>
+                            <Text text="{dialogModel>snopAllocation}" textAlign="Center"/>
                         </t:template>
                     </t:Column>
 
@@ -105,7 +106,7 @@
                             <Label text="SVPO Allocation" textAlign="Center"/>
                         </t:multiLabels>
                         <t:template>
-                            <Text text="{viewModel>svopAllocation}" textAlign="Center"/>
+                            <Text text="{dialogModel>svopAllocation}" textAlign="Center"/>
                         </t:template>
                     </t:Column>
 
