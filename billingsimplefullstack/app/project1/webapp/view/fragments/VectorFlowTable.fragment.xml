@@ -1,122 +1,266 @@
-<core:FragmentDefinition
-    xmlns="sap.m"
+<mvc:View
+    controllerName="project1.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
+    xmlns="sap.m"
     xmlns:t="sap.ui.table">
 
-    <Dialog
-        id="vectorFlowDialog"
-        title="Vector Flow Details">
+    <Wizard id="myWizard" showNextButton="false" class="wizardContainer">
 
-        <content>
-            <VBox
-                width="100%"
-                justifyContent="Center"
-                alignItems="Center"
-                class="sapUiSmallMargin">
+        <!-- Step 1: Dealer Information -->
+        <WizardStep id="step1" title="Dealer Information">
+            <VBox id="vb_Id" class="sapUiSmallMargin wizardStep">
+                <f:SimpleForm
+                    id="SimpleFormToolbar"
+                    editable="true"
+                    layout="ResponsiveGridLayout"
+                    labelSpanXL="4"
+                    labelSpanL="3"
+                    labelSpanM="4"
+                    labelSpanS="12"
+                    columnsXL="2"
+                    columnsL="1"
+                    columnsM="1"
+                    singleContainerFullSize="false">
+
+                    <f:content>
+                        <Label text="Select Customer ID" labelFor="idDealerCombo" />
+                        <ComboBox
+                            id="idDealerCombo"
+                            width="300px"
+                            showClearIcon="true"
+                            placeholder="Enter or choose an ID..."
+                            items="{ path: '/Dealer' }"
+                            class="comboBoxStyle">
+                            <core:Item key="{dealerId}" text="{dealerId}" />
+                        </ComboBox>
+
+                        <Button text="Go" type="Emphasized" press=".onGoPress" width="20%" />
+
+                        <Label text="Dealer Name" />
+                        <Input value="{viewModel>/DealerName}" editable="false" width="300px" class="DealerName"/>
+
+                        <Label text="Fund Availability" />
+                        <Input value="{viewModel>/Stock_Availability}" editable="false" width="300px" class="fundavailable"/>
+
+                        <Label text="Limit Available (in INF)" />
+                        <Input value="{viewModel>/Limit_available}" editable="false" width="300px" class="limit"/>
+                    </f:content>
+
+                </f:SimpleForm>
+            </VBox>
+        </WizardStep>
+
+        <!-- Step 2: Model Allocation -->
+        <WizardStep id="step2" title="Model Allocation">
+            <Panel class="tablePanel wizardStep">
 
                 <t:Table
-                    id="vectorFlowTable"
+                    id="allocationTable"
+                    rows="{viewModel>/Billings}"
                     selectionMode="None"
-                    columnHeaderVisible="true"
                     alternateRowColors="true"
-                    rows="{dialogModel>/Billings}"
-                    visibleRowCount="1"
-                    width="98%" >
-                    
+                    width="auto"
+                    enableColumnReordering="false"
+                    columnHeaderVisible="true"
+                    class="allocationTable">
 
-                    <!-- FST Column -->
-                    <t:Column hAlign="Center" headerSpan="6">
-                        <t:multiLabels>
-                            <Label text="Vector Flow" textAlign="Center"/>
-                            <Label text="FST" textAlign="Center" class="fstHeader"/>
-                        </t:multiLabels>
+                    <!-- Model Code -->
+                    <t:Column width="150px">
+                        <t:label>
+                            <Label text="Model Code" class="boldHeader"/>
+                        </t:label>
                         <t:template>
-                            <Text text="{dialogModel>fst}" />
+                            <Link
+                                id="idModelLink"
+                                text="{viewModel>modelCode}"
+                                press=".onModelDescPress"
+                                class="{= ${viewModel>isTotalRow} ? 'totalRowHighlight' : 'modelLink'}"/>
                         </t:template>
                     </t:Column>
 
-                    <!-- BLACK Column -->
-                    <t:Column hAlign="Center">
-                        <t:multiLabels>
-                            <Label text="Vector Flow" textAlign="Center"/>
-                            <Label text="BLACK" textAlign="Center" class="blackHeader"/>
-                        </t:multiLabels>
+                    <!-- Model Description -->
+                    <t:Column width="25%">
+                        <t:label>
+                            <Label text="Model Description" class="boldHeader"/>
+                        </t:label>
                         <t:template>
-                            <Text text="{dialogModel>black}" />
+                            <Text
+                                text="{viewModel>modelDescription}"
+                                class="{= ${viewModel>isTotalRow} ? 'totalRowHighlight' : ''}"/>
                         </t:template>
                     </t:Column>
 
-                    <!-- RED Column -->
-                    <t:Column hAlign="Center">
+                    <!-- Stock Columns -->
+                    <t:Column width="80px" hAlign="Center">
                         <t:multiLabels>
-                            <Label text="Vector Flow" textAlign="Center"/>
-                            <Label text="RED" textAlign="Center" class="redHeader"/>
+                            <Label text="Stock Availability" textAlign="Center" class="boldHeader"/>
+                            <Label text="Stock" textAlign="Center" class="boldHeader"/>
                         </t:multiLabels>
                         <t:template>
-                            <Text text="{dialogModel>red}" />
+                            <Text
+                                text="{viewModel>availability}"
+                                class="{= ${viewModel>isTotalRow} ? 'totalRowHighlight' : 'stockValue'}"/>
                         </t:template>
                     </t:Column>
 
-                    <!-- YELLOW Column -->
-                    <t:Column hAlign="Center">
+                    <t:Column width="80px" hAlign="Center">
                         <t:multiLabels>
-                            <Label text="Vector Flow" textAlign="Center"/>
-                            <Label text="YELLOW" textAlign="Center" class="yellowHeader"/>
+                            <Label text="Stock Availability" textAlign="Center" class="boldHeader"/>
+                            <Label text="Available" textAlign="Center" class="boldHeader"/>
                         </t:multiLabels>
                         <t:template>
-                            <Text text="{dialogModel>yellow}" />
+                            <Text
+                                text="{viewModel>stock}"
+                                class="{= ${viewModel>isTotalRow} ? 'totalRowHighlight' : 'stockValue'}"/>
                         </t:template>
                     </t:Column>
 
-                    <!-- GREEN Column -->
-                    <t:Column hAlign="Center">
-                        <t:multiLabels>
-                            <Label text="Vector Flow" textAlign="Center"/>
-                            <Label text="GREEN" textAlign="Center" class="greenHeader"/>
-                        </t:multiLabels>
+                    <!-- Total Quantity -->
+                    <t:Column width="80px" hAlign="Center">
+                        <t:label>
+                            <Label text="Total Qty" class="boldHeader"/>
+                        </t:label>
                         <t:template>
-                            <Text text="{dialogModel>green}" />
+                            <Text
+                                text="{viewModel>totalQuantity}"
+                                class="{= ${viewModel>isTotalRow} ? 'totalRowHighlight' : 'totalQty'}"/>
                         </t:template>
                     </t:Column>
 
-                    <!-- ALLOCATION Column -->
-                    <t:Column hAlign="Center" width="120px">
-                        <t:multiLabels>
-                            <Label text="Vector Flow" textAlign="Center"/>
-                            <Label text="ALLOCATION" textAlign="Center" class="allocationHeader"/>
-                        </t:multiLabels>
+                    <!-- Fund Required -->
+                    <t:Column width="120px" hAlign="End">
+                        <t:label>
+                            <Label text="Fund Required" class="boldHeader"/>
+                        </t:label>
                         <t:template>
-                            <Text text="{dialogModel>allocation}" />
+                            <Text
+                                text="{viewModel>fundRequired}"
+                                class="{= ${viewModel>isTotalRow} ? 'totalRowHighlight' : 'limit'}"/>
                         </t:template>
                     </t:Column>
 
-                    <!-- SNOP ALLOCATION Column -->
-                    <t:Column hAlign="Center">
-                        <t:multiLabels>
-                            <Label text="SNOP Allocation" textAlign="Center"/>
-                        </t:multiLabels>
+                    <!-- Order Value -->
+                    <t:Column width="120px" hAlign="End">
+                        <t:label>
+                            <Label text="Order Value" class="boldHeader"/>
+                        </t:label>
                         <t:template>
-                            <Text text="{dialogModel>snopAllocation}" textAlign="Center"/>
+                            <Text
+                                text="{viewModel>OrderVAlue}"
+                                class="{= ${viewModel>isTotalRow} ? 'totalRowHighlight' : 'fundavailable'}"/>
                         </t:template>
                     </t:Column>
-
-                    <!-- SVPO ALLOCATION Column -->
-                    <t:Column hAlign="Center">
-                        <t:multiLabels>
-                            <Label text="SVPO Allocation" textAlign="Center"/>
-                        </t:multiLabels>
-                        <t:template>
-                            <Text text="{dialogModel>svopAllocation}" textAlign="Center"/>
-                        </t:template>
-                    </t:Column>
-
                 </t:Table>
-            </VBox>
-        </content>
 
-        <endButton>
-            <Button text="Close" press=".onCloseDialog" />
-        </endButton>
+                <VBox height="35px"></VBox>
 
-    </Dialog>
-</core:FragmentDefinition>
+                <VBox
+                    id="vectorFlowBox"
+                    width="100%"
+                    justifyContent="Center"
+                    alignItems="Center"
+                    visible="false"
+                    class="allocationTable">
+
+                    <t:Table
+                        id="vectorFlowTable1"
+                        selectionMode="None"
+                        columnHeaderVisible="true"
+                        alternateRowColors="true"
+                        rows="{dialogModel>/Billings}"
+                        visibleRowCount="1"
+                        width="98%">
+
+                        <!-- FST Column -->
+                        <t:Column hAlign="Center" headerSpan="6">
+                            <t:multiLabels>
+                                <Label text="Vector Flow" textAlign="Center"/>
+                                <Label text="FST" textAlign="Center" class="fstHeader"/>
+                            </t:multiLabels>
+                            <t:template>
+                                <Text text="{dialogModel>fst}"/>
+                            </t:template>
+                        </t:Column>
+
+                        <!-- BLACK Column -->
+                        <t:Column hAlign="Center">
+                            <t:multiLabels>
+                                <Label text="Vector Flow" textAlign="Center"/>
+                                <Label text="BLACK" textAlign="Center" class="blackHeader"/>
+                            </t:multiLabels>
+                            <t:template>
+                                <Text text="{dialogModel>black}"/>
+                            </t:template>
+                        </t:Column>
+
+                        <!-- RED Column -->
+                        <t:Column hAlign="Center">
+                            <t:multiLabels>
+                                <Label text="Vector Flow" textAlign="Center"/>
+                                <Label text="RED" textAlign="Center" class="redHeader"/>
+                            </t:multiLabels>
+                            <t:template>
+                                <Text text="{dialogModel>red}"/>
+                            </t:template>
+                        </t:Column>
+
+                        <!-- YELLOW Column -->
+                        <t:Column hAlign="Center">
+                            <t:multiLabels>
+                                <Label text="Vector Flow" textAlign="Center"/>
+                                <Label text="YELLOW" textAlign="Center" class="yellowHeader"/>
+                            </t:multiLabels>
+                            <t:template>
+                                <Text text="{dialogModel>yellow}"/>
+                            </t:template>
+                        </t:Column>
+
+                        <!-- GREEN Column -->
+                        <t:Column hAlign="Center">
+                            <t:multiLabels>
+                                <Label text="Vector Flow" textAlign="Center"/>
+                                <Label text="GREEN" textAlign="Center" class="greenHeader"/>
+                            </t:multiLabels>
+                            <t:template>
+                                <Text text="{dialogModel>green}"/>
+                            </t:template>
+                        </t:Column>
+
+                        <!-- ALLOCATION Column -->
+                        <t:Column hAlign="Center" width="120px">
+                            <t:multiLabels>
+                                <Label text="Vector Flow" textAlign="Center"/>
+                                <Label text="ALLOCATION" textAlign="Center" class="allocationHeader"/>
+                            </t:multiLabels>
+                            <t:template>
+                                <Text text="{dialogModel>allocation}"/>
+                            </t:template>
+                        </t:Column>
+
+                        <!-- SNOP ALLOCATION Column -->
+                        <t:Column hAlign="Center">
+                            <t:multiLabels>
+                                <Label text="SNOP Allocation" textAlign="Center"/>
+                            </t:multiLabels>
+                            <t:template>
+                                <Text text="{dialogModel>snopAllocation}" textAlign="Center"/>
+                            </t:template>
+                        </t:Column>
+
+                        <!-- SVPO ALLOCATION Column -->
+                        <t:Column hAlign="Center">
+                            <t:multiLabels>
+                                <Label text="SVPO Allocation" textAlign="Center"/>
+                            </t:multiLabels>
+                            <t:template>
+                                <Text text="{dialogModel>svopAllocation}" textAlign="Center"/>
+                            </t:template>
+                        </t:Column>
+                    </t:Table>
+                </VBox>
+            </Panel>
+        </WizardStep>
+    </Wizard>
+</mvc:View>

@@ -17,60 +17,60 @@ sap.ui.define([
 
             },
 
-         onModelDescPress: async function (oEvent) {
-    const oView = this.getView();
-    const sDealerId = oView.byId("idDealerCombo").getSelectedKey();
-    const oVBox = oView.byId("vectorFlowBox");
+            onModelDescPress: async function (oEvent) {
+                const oView = this.getView();
+                const sDealerId = oView.byId("idDealerCombo").getSelectedKey();
+                const oVBox = oView.byId("vectorFlowBox");
 
-    if (!sDealerId) {
-        sap.m.MessageToast.show("Please select a Dealer.");
-        return;
-    }
+                if (!sDealerId) {
+                    sap.m.MessageToast.show("Please select a Dealer.");
+                    return;
+                }
 
-    const oLink = oEvent.getSource();
-    const oContext = oLink.getBindingContext("viewModel");
-    const sModelCode = oContext.getProperty("modelCode");
+                const oLink = oEvent.getSource();
+                const oContext = oLink.getBindingContext("viewModel");
+                const sModelCode = oContext.getProperty("modelCode");
 
-    console.log("Clicked Model Code:", sModelCode);
+                console.log("Clicked Model Code:", sModelCode);
 
-    if (this._lastModelCode === sModelCode) {
-        const bVisible = oVBox.getVisible();
-        oVBox.setVisible(!bVisible);
-        console.log("Toggled visibility for same model code:", !bVisible);
-        return;
-    }
+                if (this._lastModelCode === sModelCode) {
+                    const bVisible = oVBox.getVisible();
+                    oVBox.setVisible(!bVisible);
+                    console.log("Toggled visibility for same model code:", !bVisible);
+                    return;
+                }
 
-    try {
-        const oModel = oView.getModel();
+                try {
+                    const oModel = oView.getModel();
 
-        const oData = await new Promise((resolve, reject) => {
-            oModel.read("/Dealer(dealerId='" + sDealerId + "')", {
-                urlParameters: {
-                    "$expand": "billings"
-                },
-                success: resolve,
-                error: reject
-            });
-        });
+                    const oData = await new Promise((resolve, reject) => {
+                        oModel.read("/Dealer(dealerId='" + sDealerId + "')", {
+                            urlParameters: {
+                                "$expand": "billings"
+                            },
+                            success: resolve,
+                            error: reject
+                        });
+                    });
 
-        const aAllBillings = oData.billings?.results || [];
-        const aFilteredBilling = aAllBillings.filter(item => item.modelCode === sModelCode);
+                    const aAllBillings = oData.billings?.results || [];
+                    const aFilteredBilling = aAllBillings.filter(item => item.modelCode === sModelCode);
 
-        console.log("Filtered Billing:", aFilteredBilling);
+                    console.log("Filtered Billing:", aFilteredBilling);
 
-        const oDialogModel = new sap.ui.model.json.JSONModel({
-            Billings: aFilteredBilling
-        });
+                    const oDialogModel = new sap.ui.model.json.JSONModel({
+                        Billings: aFilteredBilling
+                    });
 
-        oView.setModel(oDialogModel, "dialogModel");
+                    oView.setModel(oDialogModel, "dialogModel");
 
-        oVBox.setVisible(true);
-        this._lastModelCode = sModelCode; 
-    } catch (error) {
-        sap.m.MessageToast.show("Failed to load dealer billing data.");
-        console.error("Error loading dealer:", error);
-    }
-},
+                    oVBox.setVisible(true);
+                    this._lastModelCode = sModelCode;
+                } catch (error) {
+                    sap.m.MessageToast.show("Failed to load dealer billing data.");
+                    console.error("Error loading dealer:", error);
+                }
+            },
 
 
             onCloseDialog: function () {
@@ -85,11 +85,11 @@ sap.ui.define([
                 var oView = this.getView();
                 var oComboBox = oView.byId("idDealerCombo");
                 var sDealerId = oComboBox.getSelectedKey();
-    const oVBox = oView.byId("vectorFlowBox");
+                const oVBox = oView.byId("vectorFlowBox");
 
-    if (oVBox) {
-        oVBox.setVisible(false);
-    }
+                if (oVBox) {
+                    oVBox.setVisible(false);
+                }
 
                 if (!sDealerId) {
                     sap.m.MessageToast.show("Please select a Dealer first.");
@@ -153,6 +153,18 @@ sap.ui.define([
                         oViewModel.setProperty("/TotalFundRequired", oCurrencyFormatter.format(totalFundRequired, "INR"));
                         oViewModel.setProperty("/TotalOrderValue", oCurrencyFormatter.format(totalOrderValue, "INR"));
 
+                        aBillings.push({
+                            modelCode: "TOTAL",
+                            modelDescription: "",
+                            availability: oIndianFormatter.format(totalAvailable),
+                            stock: oIndianFormatter.format(totalStock),
+                            totalQuantity: oIndianFormatter.format(totalQuantity),
+                            fundRequired: oCurrencyFormatter.format(totalFundRequired, "INR"),
+                            OrderVAlue: oCurrencyFormatter.format(totalOrderValue, "INR"),
+                            isTotalRow: true
+                        });
+
+                        oViewModel.setProperty("/Billings", aBillings);
 
                         var oTableContainer = oView.byId("tableContainer");
                         var oTotalTableContainer = oView.byId("totaltableContainer");

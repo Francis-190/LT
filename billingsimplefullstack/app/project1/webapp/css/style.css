@@ -1,98 +1,101 @@
-/* === Page Styling === */
-.mainPage {
-    background-color: #f4f6f8;
-    padding: 15px;
-    font-family: "72", "72 Regular", Arial, sans-serif;
+/* === General Page Styling === */
+.mainPage,
+.wizardContainer {
+  background-color: #f4f6f8;
+  padding: 15px;
+  font-family: "72", "72 Regular", Arial, sans-serif;
 }
 
-/* === Panel Styling === */
+/* === Wizard Steps === */
+.wizardStep {
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+/* === Panels === */
 .tablePanel {
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    padding: 15px;
-    margin-bottom: 20px;
-    transition: transform 0.2s;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  padding: 15px;
+  margin-bottom: 20px;
+  transition: transform 0.2s;
 }
-
 .tablePanel:hover {
-    transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
-.sapMPanelHdr {
-    font-weight: 700;
-    font-size: 1.05rem;
-    color: #2c3e50;
-}
-
-/* === Hidden Panels === */
-.hiddenTable {
-    display: none;
-}
-.visibleTable {
-    display: block;
-}
-
-/* === Form Labels and Text === */
+/* === Form Labels and Inputs === */
 #dealerForm .sapMLabel {
-    font-weight: 600;
-    font-size: 0.875rem;
-    color: #34495e;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #34495e;
 }
-
 #dealerForm .sapMText {
-    font-size: 0.875rem;
-    color: #2c3e50;
+  font-size: 0.875rem;
+  color: #2c3e50;
 }
 
-/* Colored Text Fields */
+/* === Input Field Coloring === */
 .DealerName {
-    font-weight: bold;
-    color: #1e88e5;
+  font-weight: bold;
+  color: #1e88e5;
 }
-
 .fundavailable {
-    font-weight: bold;
-    color: #27ae60;
+  font-weight: bold;
+  color: #27ae60;
 }
-
 .limit {
-    font-weight: bold;
-    color: #e67e22;
+  font-weight: bold;
+  color: #e67e22;
 }
-
 .totalQty {
-    font-weight: bold;
-    color: #8e44ad;
+  font-weight: bold;
+  color: #8e44ad;
 }
 
 /* === Buttons === */
 .actionButton {
-    border-radius: 8px;
-    font-weight: 600;
-    background-color: #1e88e5;
-    color: white;
+  border-radius: 8px;
+  font-weight: 600;
+  background-color: #1e88e5;
+  color: white;
+  margin-top: 5px;
 }
-
 .actionButton:hover {
-    background-color: #1565c0;
+  background-color: #1565c0;
 }
 
-/* === Table Styling === */
+/* === ComboBox Styling === */
+.comboBoxStyle {
+  min-width: 250px;
+}
+
+/* === SAPUI5 Table Styling === */
 .allocationTable {
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    font-size: 0.875rem;
-    overflow: hidden;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  overflow: hidden;
 }
 
 /* Table Headers */
-.fstHeader, .blackHeader, .redHeader, .yellowHeader, .greenHeader, .allocationHeader {
-    font-weight: bold !important;
-    text-align: center !important;
-    color: white !important;
+.boldHeader {
+  font-weight: bold !important;
+  text-align: center !important;
 }
 
+/* Multi-label colored headers (Vector Flow) */
+.fstHeader,
+.blackHeader,
+.redHeader,
+.yellowHeader,
+.greenHeader,
+.allocationHeader {
+  font-weight: bold !important;
+  text-align: center !important;
+  color: white !important;
+}
 .fstHeader { background-color: #1976d2 !important; }
 .blackHeader { background-color: #000000 !important; }
 .redHeader { background-color: #d32f2f !important; }
@@ -101,111 +104,69 @@
 .allocationHeader { background-color: #1976d2 !important; }
 
 /* Table Cells */
-.fstCell { font-weight: bold; background-color: #e3f2fd; text-align: center; }
-.blackCell { font-weight: bold; background-color: #e0e0e0; text-align: center; color: black; }
-.redCell { font-weight: bold; background-color: #ffcdd2; text-align: center; color: black; }
-.yellowCell { font-weight: bold; background-color: #fff9c4; text-align: center; }
-.greenCell { font-weight: bold; background-color: #c8e6c9; text-align: center; }
-.allocationCell { font-weight: bold; background-color: #bbdefb; text-align: center; }
-
-/* Table Rows */
-.allocationTable .sapUiTableRow.sapUiTableRowEven { background-color: #fcfcfc; }
-.allocationTable .sapUiTableRow.sapUiTableRowOdd { background-color: #f9f9f9; }
-.allocationTable .sapUiTableRowHover { background-color: #e0f7fa !important; }
-
-/* Table Text and Links */
-.allocationTable .sapMText { text-align: center; padding: 4px 6px; }
-.modelLink { color: #1e88e5; text-decoration: underline; cursor: pointer; }
-.modelLink:hover { color: #1565c0; }
 .stockValue { font-weight: 600; color: #34495e; }
-
-/* Bold Headers */
-.boldHeader { font-weight: bold !important; text-align: center; }
-
-/* Fund Required Text Highlight */
-.fundRequiredText { font-weight: bold; color: #d32f2f; }
-
-/* === Responsive adjustments === */
-@media (max-width: 1024px) {
-    .tablePanel, .allocationTable, .totalForm {
-        width: 100% !important;
-        font-size: 0.85rem;
-    }
-}
-
-/* === Wizard Container === */
-.wizardContainer {
-    background-color: #f4f6f8;
-    padding: 15px;
-    font-family: "72", "72 Regular", Arial, sans-serif;
-}
-
-/* === Wizard Steps === */
-.wizardStep {
-    padding: 10px;
-    margin-bottom: 15px;
-}
-
-/* === Panels === */
-.tablePanel {
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    padding: 15px;
-}
-
-/* === Table Styling === */
-.allocationTable {
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    font-size: 0.875rem;
-}
-
-/* Table Headers */
-.boldHeader {
-    font-weight: bold;
-    text-align: center;
-}
-
-/* Table Cells */
 .DealerName { color: #1e88e5; font-weight: bold; }
 .fundavailable { color: #27ae60; font-weight: bold; }
 .limit { color: #e67e22; font-weight: bold; }
 .totalQty { color: #8e44ad; font-weight: bold; }
-.stockValue { font-weight: 600; color: #34495e; }
 
-/* Links */
+/* Colored Vector Flow Cells (optional if used programmatically) */
+.fstCell { background-color: #e3f2fd; text-align: center; font-weight: bold; }
+.blackCell { background-color: #e0e0e0; text-align: center; font-weight: bold; color: black; }
+.redCell { background-color: #ffcdd2; text-align: center; font-weight: bold; color: black; }
+.yellowCell { background-color: #fff9c4; text-align: center; font-weight: bold; }
+.greenCell { background-color: #c8e6c9; text-align: center; font-weight: bold; }
+.allocationCell { background-color: #bbdefb; text-align: center; font-weight: bold; }
+
+/* === Row Backgrounds === */
+.allocationTable .sapUiTableRow.sapUiTableRowEven {
+  background-color: #fcfcfc;
+}
+.allocationTable .sapUiTableRow.sapUiTableRowOdd {
+  background-color: #f9f9f9;
+}
+.allocationTable .sapUiTableRowHover {
+  background-color: #e0f7fa !important;
+}
+
+/* === Total Row Highlight (Full Row + Cells) === */
+.sapUiTableRow.totalRowHighlight,
+.sapUiTableCell .totalRowHighlight {
+  background-color: #fff3cd !important; /* Light yellow */
+  font-weight: bold !important;
+  color: #000 !important;
+}
+
+/* === Total Row Text Colors === */
+.totalFund { color: #d35400; font-weight: bold; }
+.totalOrder { color: #1e8449; font-weight: bold; }
+
+/* === Links === */
 .modelLink {
-    color: #1e88e5;
-    text-decoration: underline;
-    cursor: pointer;
+  color: #1e88e5;
+  text-decoration: underline;
+  cursor: pointer;
 }
-.modelLink:hover { color: #1565c0; }
-
-/* Alternate Row Colors */
-.allocationTable .sapUiTableRow.sapUiTableRowEven { background-color: #fcfcfc; }
-.allocationTable .sapUiTableRow.sapUiTableRowOdd { background-color: #f9f9f9; }
-.allocationTable .sapUiTableRowHover { background-color: #e0f7fa !important; }
-
-/* Buttons */
-.actionButton {
-    border-radius: 8px;
-    font-weight: 600;
-    background-color: #1e88e5;
-    color: white;
-    margin-top: 5px;
-}
-.actionButton:hover { background-color: #1565c0; }
-
-/* ComboBox Styling */
-.comboBoxStyle {
-    min-width: 250px;
+.modelLink:hover {
+  color: #1565c0;
 }
 
-/* Responsive Adjustments */
+/* === Miscellaneous === */
+.fundRequiredText {
+  font-weight: bold;
+  color: #d32f2f;
+}
+
+/* === Hidden / Visible Sections === */
+.hiddenTable { display: none; }
+.visibleTable { display: block; }
+
+/* === Responsive Adjustments === */
 @media (max-width: 1024px) {
-    .wizardContainer, .allocationTable, #totalForm {
-        width: 100% !important;
-        font-size: 0.85rem;
-    }
+  .tablePanel,
+  .allocationTable,
+  .wizardContainer {
+    width: 100% !important;
+    font-size: 0.85rem;
+  }
 }
