@@ -20,6 +20,7 @@ entity Billings  {
     rational:String;
     snopAllocation:String;
     svopAllocation:String;
+
     
 }
 
@@ -30,4 +31,17 @@ entity Dealer {
     Stock_Availability: Integer;
     Limit_available: Integer;
     
+}
+
+entity PendingOrders {
+    key modelCode : String;
+    modelDescription : String;
+    totalQuantity : Integer;
+    createdBy : String;
+    @cds.persistence.enum.value
+    status: String enum{
+        Pending   = 'PE';
+        Approved  = 'AP';
+        Rejected  = 'RE';
+    };
 }

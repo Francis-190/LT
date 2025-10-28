@@ -1,0 +1,175 @@
+@server=http://localhost:4004
+@username=alice
+@password=
+
+
+### Billings
+# @name Billings_GET
+GET {{server}}/odata/v4/my/Billings
+Authorization: Basic {{username}}:{{password}}
+
+
+### Billings
+# @name Billings_POST
+POST {{server}}/odata/v4/my/Billings
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+{
+  "modelCode": "Billings-1977879",
+  "modelDescription": "modelDescription-1977879",
+  "stock": "stock-1977879",
+  "availability": "availability-1977879",
+  "totalQuantity": "totalQuantity-1977879",
+  "fundRequired": "fundRequired-1977879",
+  "totalAllocation": "totalAllocation-1977879",
+  "OrderVAlue": "OrderVAlue-1977879",
+  "dealer": {
+    "dealerId": "Dealer-19219892"
+  },
+  "vectorReq": "vectorReq-1977879",
+  "fst": "fst-1977879",
+  "black": "black-1977879",
+  "red": "red-1977879",
+  "yellow": "yellow-1977879",
+  "green": "green-1977879",
+  "rational": "rational-1977879",
+  "snopAllocation": "snopAllocation-1977879",
+  "svopAllocation": "svopAllocation-1977879",
+  "status": "status-1977879"
+}
+
+
+### Billings
+# @name Billings_PATCH
+PATCH {{server}}/odata/v4/my/Billings/Billings-1977879
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+{
+  "modelCode": "Billings-1977879",
+  "modelDescription": "modelDescription-1977879",
+  "stock": "stock-1977879",
+  "availability": "availability-1977879",
+  "totalQuantity": "totalQuantity-1977879",
+  "fundRequired": "fundRequired-1977879",
+  "totalAllocation": "totalAllocation-1977879",
+  "OrderVAlue": "OrderVAlue-1977879",
+  "dealer": {
+    "dealerId": "Dealer-19219892"
+  },
+  "vectorReq": "vectorReq-1977879",
+  "fst": "fst-1977879",
+  "black": "black-1977879",
+  "red": "red-1977879",
+  "yellow": "yellow-1977879",
+  "green": "green-1977879",
+  "rational": "rational-1977879",
+  "snopAllocation": "snopAllocation-1977879",
+  "svopAllocation": "svopAllocation-1977879",
+  "status": "status-1977879"
+}
+
+
+### Billings
+# @name Billings_DELETE
+DELETE {{server}}/odata/v4/my/Billings/Billings-1977879
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+
+### Dealer
+# @name Dealer_GET
+GET {{server}}/odata/v4/my/Dealer
+Authorization: Basic {{username}}:{{password}}
+
+
+### Dealer
+# @name Dealer_POST
+POST {{server}}/odata/v4/my/Dealer
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+{
+  "dealerId": "Dealer-19219892",
+  "DealerName": "DealerName-19219892",
+  "Stock_Availability": 69,
+  "Limit_available": 95
+}
+
+
+### Dealer
+# @name Dealer_PATCH
+PATCH {{server}}/odata/v4/my/Dealer/Dealer-19219892
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+{
+  "dealerId": "Dealer-19219892",
+  "DealerName": "DealerName-19219892",
+  "Stock_Availability": 69,
+  "Limit_available": 95
+}
+
+
+### Dealer
+# @name Dealer_DELETE
+DELETE {{server}}/odata/v4/my/Dealer/Dealer-19219892
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+
+### PendingOrders
+# @name PendingOrders_GET
+GET {{server}}/odata/v4/my/PendingOrders
+Authorization: Basic {{username}}:{{password}}
+
+
+### PendingOrders
+# @name PendingOrders_POST
+POST {{server}}/odata/v4/my/PendingOrders
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+{
+  "modelCode": "PendingOrders-27986316",
+  "modelDescription": "modelDescription-27986316",
+  "totalQuantity": 66,
+  "fundRequired": 24055500.23,
+  "createdBy": "createdBy-27986316",
+  "approved": true
+}
+
+
+### PendingOrders
+# @name PendingOrders_PATCH
+PATCH {{server}}/odata/v4/my/PendingOrders/PendingOrders-27986316
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+{
+  "modelCode": "PendingOrders-27986316",
+  "modelDescription": "modelDescription-27986316",
+  "totalQuantity": 66,
+  "fundRequired": 24055500.23,
+  "createdBy": "createdBy-27986316",
+  "approved": true
+}
+
+
+### PendingOrders
+# @name PendingOrders_DELETE
+DELETE {{server}}/odata/v4/my/PendingOrders/PendingOrders-27986316
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+
+### approvedOrder
+# @name approvedOrder_POST
+POST {{server}}/odata/v4/my/approvedOrder
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+{
+  "modelCode": "modelCode-29226739"
+}
